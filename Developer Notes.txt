@@ -1,0 +1,23 @@
+---EF Project with New Database---
+
+NuGet Packages
+	Install-Package Microsoft.EntityFrameworkCore.Sqlite
+	Install-Package Microsoft.EntityFrameworkCore.Tools
+
+Create Models with a DBContext
+	/Models/ModelContext.cs
+	
+	Don't forget this code in the DB Context... You've done it before!
+	protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+			//When using SQLite, make sure you specify the DB path, otherwise you'll create it and not be able to access it
+            optionsBuilder.UseSqlite("Data Source={path}\NewEFDatabase.db");
+        }
+		
+	--If MS SQL DB use connection string > Server=myServerAddress;Database=myDataBase;User Id=myUsername; Password=myPassword;
+	--If MS SQL DB use connection string > Server=myServerAddress;Database=myDataBase;Trusted_Connection=True;
+	
+Create Database
+	Add-Migration InitialCreate
+	Update-Database
+
